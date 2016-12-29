@@ -9,11 +9,13 @@ router.get('/', function *(next) {
   request(exchangeURL, function(error, response, body) {
     if (!error && response.statusCode == 200) {
       // console.log(response);
-      exchangeInfo = body;
-      console.log(exchangeInfo);
+      exchangeInfo = JSON.parse(body);
+      console.log(exchangeInfo.reason);
     }
   })
-  yield this.render('index', exchangeInfo);
+  yield this.render('index', {
+    info: exchangeInfo
+  });
 });
 
 module.exports = router;
